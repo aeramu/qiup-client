@@ -15,7 +15,7 @@ const LOGIN = gql`
   }
 `;
 
-export default () => {
+export default ({navigation}) => {
   const [message, setMessage] = useState(null);
   const [loginMutation] = useMutation(LOGIN)
   const [hello] = useLazyQuery(
@@ -41,6 +41,7 @@ export default () => {
       }
     })
     .then(console.log)
+    navigation.navigate('Home')
   }
 
   useEffect(() => {
@@ -67,7 +68,8 @@ export default () => {
         secureTextEntry={true}
         placeholder="password"
       />
-      <Button title="Submit" onPress={handleLogin}/>
+      <Button title="Login" onPress={handleLogin}/>
+      <Button title="Register" onPress={()=>navigation.navigate('Register')}/>
     </View>
   );
 }
