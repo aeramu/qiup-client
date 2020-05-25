@@ -3,35 +3,18 @@ import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 import { gql } from 'apollo-boost';
 
-const GET_HELLOWORLD = gql`
-  {
-    hello
-  }
-`;
-
 const LOGIN = gql`
   mutation ($email: String!, $password: String!) {
     login(email: $email, password: $password)
   }
-`;
+`
 
 export default ({navigation}) => {
-  const [message, setMessage] = useState(null);
-  const [loginMutation] = useMutation(LOGIN)
-  const [hello] = useLazyQuery(
-    GET_HELLOWORLD, {
-      onCompleted(data) {
-        setMessage(data.hello)
-      },
-      onError(error) {
-        console.log(error, 'ERROR')
-      }
-    }
-  )
-
   //form input
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [loginMutation] = useMutation(LOGIN)
 
   const handleLogin = () => {
     loginMutation({
@@ -43,33 +26,38 @@ export default ({navigation}) => {
     .then(console.log)
     navigation.navigate('Home')
   }
-
-  useEffect(() => {
-    // get message hello world from backend
-    hello();
-  }, [])
-
-  if (!message) return <Text>Loading...</Text>;
+ 
+  useEffect(()=>{
+    //check token in async storage
+    console.log('use effect')
+  })
+  console.log('not use effect')
+  //if (!message) return <Text>Loading...</Text>;
 
   return (
     <View style={styles.container}>
-      <Text>Apps running</Text>
-      <Text>{message}</Text>
       <TextInput
-        style={{ height: 40, borderWidth: 1, padding: 10 }}
-        onChangeText={text => setEmail(text)}
-        value={email}
+        style={{ height: 40, borderWidth: 1, padding: 10, margin: 20 }}
         placeholder="email"
+        onChangeText={text => setEmail(text)}
       />
       <TextInput
-        style={{ height: 40, borderWidth: 1, padding: 10 }}
-        onChangeText={text => setPassword(text)}
-        value={password}
-        secureTextEntry={true}
+        style={{ height: 40, borderWidth: 1, padding: 10, margin: 20 }}
         placeholder="password"
+        secureTextEntry={true}
+        onChangeText={text => setPassword(text)}
       />
-      <Button title="Login" onPress={handleLogin}/>
-      <Button title="Register" onPress={()=>navigation.navigate('Register')}/>
+      <Button
+        title="Login"
+        onPress={handleLogin}  
+      />
+      <View style={{margin:20, margin: 20, alignSelf:'center', flexDirection:'row'}}>
+        <Text>Don't have an account? </Text>
+        <Text
+          style={{color: 'blue'}}
+          onPress={()=>navigation.navigate('Register')}
+        >Register</Text>
+      </View>
     </View>
   );
 }
@@ -77,8 +65,9 @@ export default ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 20,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
   },
 });
