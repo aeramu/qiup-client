@@ -22,8 +22,8 @@ const myProfileNavigator = createStackNavigator({
 
 const mainNavigator = createBottomTabNavigator({
     Home: Home,
-    searchNavigator,
-    myProfileNavigator
+    Search: searchNavigator,
+    MyProfile: myProfileNavigator
 })
 
 const authNavigator = createSwitchNavigator({
