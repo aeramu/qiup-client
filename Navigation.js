@@ -9,6 +9,7 @@ import MyProfile from './src/Page/MyProfile'
 import ChangeProfile from './src/Page/ChangeProfile'
 import Search from './src/Page/Search'
 import Profile from './src/Page/Profile'
+import Loading from './src/Page/Loading'
 
 const searchNavigator = createStackNavigator({
     Search: Search,
@@ -32,6 +33,7 @@ const authNavigator = createStackNavigator({
 })
 
 const rootNavigator = createSwitchNavigator({
+    Loading: Loading,
     authNavigator,
     mainNavigator
 })
