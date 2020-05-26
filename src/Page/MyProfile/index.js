@@ -1,12 +1,35 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import {useQuery} from '@apollo/react-hooks'
+import { gql } from 'apollo-boost';
+
+const MY_PROFILE = gql`
+  query{
+    me{
+      username
+      profile{
+        name
+        bio
+      }
+    }
+  }
+`
 
 export default ({navigation}) => {
+  const {loading, data} = useQuery(MY_PROFILE)
+
+  if (loading) return (
+    <View style={styles.container}>
+      <Text>Loading....</Text>
+    </View>
+  )
+
   return (
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
-      <TextInput/>
-      <TextInput/>
+      <Text>{data.me.username}</Text>
+      <Text>{data.me.profile.name}</Text>
+      <Text>{data.me.profile.bio}</Text>
       <Button title='login' onPress={()=>navigation.navigate('Home')}>Login</Button>
     </View>
   );
