@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
-import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, AsyncStorage } from 'react-native';
 import { gql } from 'apollo-boost';
 
 const LOGIN = gql`
@@ -13,50 +13,65 @@ export default ({navigation}) => {
   //form input
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('')
 
-  const [loginMutation] = useMutation(LOGIN)
+  const [loginMutation, {data}] = useMutation(LOGIN)
 
   const handleLogin = () => {
+    console.log(email)
+    console.log(password)
     loginMutation({
       variables: {
         email,
         password
       }
     })
-    .then(console.log)
-    navigation.navigate('Home')
+    .then(async (result) => {
+      if (result.data.login.indexOf('token') == -1){
+        setMessage(result.data.login)
+      } else{
+        await AsyncStorage.setItem('token',result.data.login)
+        navigation.navigate('Home')
+      }
+    })
   }
  
-  useEffect(()=>{
-    //check token in async storage
-    console.log('use effect')
-  })
-  console.log('not use effect')
+  // useEffect(()=>{
+  //   check token in async storage
+  //   console.log('use effect')
+  // })
+  // console.log('not use effect')
   //if (!message) return <Text>Loading...</Text>;
 
   return (
     <View style={styles.container}>
       <TextInput
-        style={{ height: 40, borderWidth: 1, padding: 10, margin: 20 }}
+        style={{ height: 40, borderWidth: 1, padding: 10, margin: 10 }}
         placeholder="Email or username"
+        autoCapitalize="none"
         onChangeText={text => setEmail(text)}
       />
       <TextInput
-        style={{ height: 40, borderWidth: 1, padding: 10, margin: 20 }}
+        style={{ height: 40, borderWidth: 1, padding: 10, margin: 10 }}
         placeholder="Password"
         secureTextEntry={true}
         onChangeText={text => setPassword(text)}
       />
+      <Text
+        style={{marginBottom: 10, color:'red'}}
+        >{message}
+      </Text>
       <Button
         title="Login"
         onPress={handleLogin}  
       />
-      <View style={{margin:20, margin: 20, alignSelf:'center', flexDirection:'row'}}>
+      <View style={{margin:20, alignSelf:'center', flexDirection:'row'}}>
         <Text>Don't have an account? </Text>
         <Text
           style={{color: 'blue'}}
           onPress={()=>navigation.navigate('Register')}
-        >Register</Text>
+          >Register
+        </Text>
       </View>
     </View>
   );
