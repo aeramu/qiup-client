@@ -26,7 +26,7 @@ const mainNavigator = createBottomTabNavigator({
     Profile: myProfileNavigator
 })
 
-const authNavigator = createSwitchNavigator({
+const authNavigator = createStackNavigator({
     Login: Login,
     Register: Register
 })

@@ -15,11 +15,9 @@ export default ({navigation}) => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('')
 
-  const [loginMutation, {data}] = useMutation(LOGIN)
+  const [loginMutation] = useMutation(LOGIN)
 
   const handleLogin = () => {
-    console.log(email)
-    console.log(password)
     loginMutation({
       variables: {
         email,
