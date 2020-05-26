@@ -38,12 +38,12 @@ export default ({navigation}) => {
     <View style={styles.container}>
       <TextInput
         style={{ height: 40, borderWidth: 1, padding: 10, margin: 20 }}
-        placeholder="email"
+        placeholder="Email or username"
         onChangeText={text => setEmail(text)}
       />
       <TextInput
         style={{ height: 40, borderWidth: 1, padding: 10, margin: 20 }}
-        placeholder="password"
+        placeholder="Password"
         secureTextEntry={true}
         onChangeText={text => setPassword(text)}
       />
