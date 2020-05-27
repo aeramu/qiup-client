@@ -6,7 +6,7 @@ import Login from './src/Page/Login'
 import Register from './src/Page/Register'
 import Home from './src/Page/Home'
 import MyProfile from './src/Page/MyProfile'
-import ChangeProfile from './src/Page/ChangeProfile'
+import EditProfile from './src/Page/EditProfile'
 import Search from './src/Page/Search'
 import Profile from './src/Page/Profile'
 import Loading from './src/Page/Loading'
@@ -18,7 +18,7 @@ const searchNavigator = createStackNavigator({
 
 const myProfileNavigator = createStackNavigator({
     MyProfile: MyProfile,
-    ChangeProfile: ChangeProfile,
+    EditProfile: EditProfile,
 })
 
 const mainNavigator = createBottomTabNavigator({

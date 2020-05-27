@@ -32,6 +32,10 @@ export default ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <Button
+        title='Edit Profile'
+        onPress={() => navigation.navigate('EditProfile',{data})}
+      />
       <Text>Open up App.tsx to start working on your app!</Text>
       <Text>{data.me.username}</Text>
       <Text>{data.me.profile.name}</Text>

@@ -10,7 +10,6 @@ const LOGIN = gql`
 `
 
 export default ({navigation}) => {
-  //form input
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('')
@@ -33,13 +32,6 @@ export default ({navigation}) => {
       }
     })
   }
- 
-  // useEffect(()=>{
-  //   check token in async storage
-  //   console.log('use effect')
-  // })
-  // console.log('not use effect')
-  //if (!message) return <Text>Loading...</Text>;
 
   return (
     <View style={styles.container}>
