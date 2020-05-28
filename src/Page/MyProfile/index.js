@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, AsyncStorage} from 'react-native';
+import { StyleSheet, Text, View, Button} from 'react-native';
 import {useQuery} from '@apollo/react-hooks'
 import { gql } from 'apollo-boost';
 
 const MY_PROFILE = gql`
   query{
     me{
+      id
       username
       profile{
         name
@@ -16,19 +17,13 @@ const MY_PROFILE = gql`
 `
 
 export default ({navigation}) => {
-  const {loading, data, client} = useQuery(MY_PROFILE)
+  const {loading, data} = useQuery(MY_PROFILE)
 
   if (loading) return (
     <View style={styles.container}>
       <Text>Loading....</Text>
     </View>
   )
-
-  const handleLogout = async () => {
-    await AsyncStorage.removeItem('token')
-    client.resetStore()
-    navigation.navigate('Login')
-  }
 
   return (
     <View style={styles.container}>
@@ -40,10 +35,6 @@ export default ({navigation}) => {
       <Text>{data.me.username}</Text>
       <Text>{data.me.profile.name}</Text>
       <Text>{data.me.profile.bio}</Text>
-      <Button
-        title='logout'
-        onPress={handleLogout}
-      />
     </View>
   );
 }

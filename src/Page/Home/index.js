@@ -1,13 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, AsyncStorage } from 'react-native';
+import {useApolloClient} from '@apollo/react-hooks'
 
 export default ({navigation}) => {
+  const client = useApolloClient()
+
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem('token')
+    client.resetStore()
+    navigation.navigate('Login')
+  }
+
   return (
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
-      <TextInput/>
-      <TextInput/>
-      <Button title='login' onPress={()=>navigation.navigate('Home')}>Login</Button>
+      <Button
+        title='logout'
+        onPress={handleLogout}
+      />
     </View>
   );
 }

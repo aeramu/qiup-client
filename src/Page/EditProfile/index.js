@@ -5,15 +5,18 @@ import {gql} from 'apollo-boost'
 
 const EDIT_PROFILE = gql`
   mutation($name: String!, $bio: String!){
-    changeProfile(name: $name, bio: $bio){
-      name
-      bio
+    editProfile(name: $name, bio: $bio){
+      id
+      username
+      profile{
+        name
+        bio
+      }
     }
   }
 `
 
 export default ({navigation}) => {
-  //console.log(navigation)
   const {data} = navigation.state.params
 
   const [name,setName] = useState(data.me.profile.name)
