@@ -12,28 +12,43 @@ import Profile from './src/Page/Profile'
 import Loading from './src/Page/Loading'
 
 const searchNavigator = createStackNavigator({
-    Search: Search,
-    Profile: Profile,
+    'Search': Search,
+    'Profile': Profile,
+},
+{
+    defaultNavigationOptions:{
+        headerShown:false,
+    }
 })
 
 const myProfileNavigator = createStackNavigator({
-    MyProfile: MyProfile,
-    EditProfile: EditProfile,
+    'MyProfile': MyProfile,
+    'EditProfile': EditProfile,
+},
+{
+    defaultNavigationOptions:{
+        headerShown:false,
+    }
 })
 
 const mainNavigator = createBottomTabNavigator({
-    Explore: searchNavigator,
-    Home: Home,
-    Profile: myProfileNavigator
+    'Explore': searchNavigator,
+    'Home': Home,
+    'Profile': myProfileNavigator
 })
 
 const authNavigator = createStackNavigator({
-    Login: Login,
-    Register: Register
+    'Login': Login,
+    'Register': Register
+},
+{
+    defaultNavigationOptions:{
+        headerShown:false,
+    }
 })
 
 const rootNavigator = createSwitchNavigator({
-    Loading: Loading,
+    'Loading': Loading,
     authNavigator,
     mainNavigator
 })
