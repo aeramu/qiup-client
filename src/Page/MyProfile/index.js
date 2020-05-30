@@ -12,6 +12,7 @@ const MY_PROFILE = gql`
         name
         bio
         profilePhoto
+        coverPhoto
       }
     }
   }
@@ -32,12 +33,15 @@ export default ({navigation}) => {
         title='Edit Profile'
         onPress={() => navigation.navigate('EditProfile',{data})}
       />
-      <Text>Open up App.tsx to start working on your app!</Text>
       <Image
-        style={styles.tinyLogo}
+        style={{width: 200, height:200}}
+        source={{uri: data.me.profile.coverPhoto}}
+      />
+      <Image
+        style={{width:100, height: 100}}
         source={{uri: data.me.profile.profilePhoto}}
       />
-      <Text>{data.me.username}</Text>
+      <Text>@{data.me.username}</Text>
       <Text>{data.me.profile.name}</Text>
       <Text>{data.me.profile.bio}</Text>
     </View>
@@ -50,9 +54,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  tinyLogo: {
-    width: 50,
-    height: 50,
   },
 });
