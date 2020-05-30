@@ -3,7 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 
 import Login from './src/Page/Login'
-import Register from './src/Page/Register'
+import RegisterEmail from './src/Page/Register/RegisterEmail'
 import Home from './src/Page/Home'
 import MyProfile from './src/Page/MyProfile'
 import EditProfile from './src/Page/EditProfile'
@@ -37,9 +37,18 @@ const mainNavigator = createBottomTabNavigator({
     'Profile': myProfileNavigator
 })
 
+const registerNavigator = createStackNavigator({
+    'Register Email': RegisterEmail,
+},
+{
+    defaultNavigationOptions:{
+        headerShown:false,
+    }
+})
+
 const authNavigator = createStackNavigator({
     'Login': Login,
-    'Register': Register
+    'Register': registerNavigator
 },
 {
     defaultNavigationOptions:{
