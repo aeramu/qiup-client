@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Image, Dimensions, TouchableHighlight } from 'react-native';
+import {Text, View, Button, TextInput, Image, Dimensions, TouchableHighlight } from 'react-native';
 import {useMutation, useLazyQuery} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
 import * as ImagePicker from 'expo-image-picker'
@@ -106,6 +106,7 @@ export default ({navigation}) => {
       navigation.navigate('MyProfile')
     })
   }
+
   return (
     <View style={{flex:1}}>
       <TouchableHighlight onPress={handleChangeCoverPhoto}>
@@ -143,43 +144,5 @@ export default ({navigation}) => {
         />
       </View>
     </View>
-    // <View style={{flex:1}}>
-    //   <TouchableHighlight
-    //     style={{height:Math.round(Dimensions.get('window').width*2/3)}}
-    //     onPress={handleChangeCoverPhoto}
-    //   >
-    //     <Image
-    //       style={{alignSelf:'stretch',height:Math.round(Dimensions.get('window').width*2/3)}}
-    //       source={{uri: coverPhoto}}
-    //     />
-    //   </TouchableHighlight>
-    //   <View style={{height:50,justifyContent:'flex-end',paddingHorizontal:15}}>
-    //     <TouchableHighlight
-    //       onPress={handleChangeProfilePhoto}
-    //       style={{width:100,height:100,borderRadius:100}}
-    //     >
-    //       <Image
-    //         style={{width:100,height:100,borderRadius:100,borderWidth:2,borderColor:'white'}}
-    //         source={{uri: profilePhoto}}
-    //       />
-    //     </TouchableHighlight>
-    //     <TextInput
-    //       style={{height:40,borderWidth:1,padding:10,margin:10}}
-    //       value={name}
-    //       autoCapitalize="none"
-    //       onChangeText={text => setName(text)}
-    //     />
-    //     <TextInput
-    //       style={{height:40,borderWidth:1,padding:10,margin:10}}
-    //       value={bio}
-    //       autoCapitalize="none"
-    //       onChangeText={text => setBio(text)}
-    //     />
-    //     <Button
-    //       title='save'
-    //       onPress={handleEditProfile}
-    //     />
-    //   </View>
-    // </View>
   );
 }

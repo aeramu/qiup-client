@@ -4,6 +4,9 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 
 import Login from './src/Page/Login'
 import RegisterEmail from './src/Page/Register/RegisterEmail'
+import RegisterPassword from './src/Page/Register/RegisterPassword'
+import RegisterUsername from './src/Page/Register/RegisterUsername'
+import RegisterProfile from './src/Page/Register/RegisterProfile'
 import Home from './src/Page/Home'
 import MyProfile from './src/Page/MyProfile'
 import EditProfile from './src/Page/EditProfile'
@@ -38,7 +41,10 @@ const mainNavigator = createBottomTabNavigator({
 })
 
 const registerNavigator = createStackNavigator({
-    'Register Email': RegisterEmail,
+    'RegisterEmail': RegisterEmail,
+    'RegisterPassword': RegisterPassword,
+    'RegisterUsername': RegisterUsername,
+    'RegisterProfile': RegisterProfile,
 },
 {
     defaultNavigationOptions:{

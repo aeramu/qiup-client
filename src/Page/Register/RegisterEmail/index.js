@@ -3,11 +3,10 @@ import {View} from 'react-native'
 import {Input, Button} from 'react-native-elements'
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
-import { set } from 'react-native-reanimated'
 
 const CHECK_EMAIL = gql`
     mutation($email:String!){
-        checkEmail(email:$email)
+        isEmailAvailable(email:$email)
     }
 `
 
@@ -24,12 +23,12 @@ export default (({navigation})=>{
         else{
             checkEmail({
                 variables:{
-                    email
+                    email: email.toLowerCase()
                 }
             })
             .then((result) => {
-                if(result.data.checkEmail){
-                    navigation.navigate('Register Password',{data:{email}})
+                if(result.data.isEmailAvailable){
+                    navigation.navigate('RegisterPassword',{data:{email}})
                 }
                 else{
                     setMessage('Email already registered')
@@ -38,9 +37,8 @@ export default (({navigation})=>{
         }
     }
 
-
     const isValidEmail = (email) => {
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         return reg.test(email)
     }
 
@@ -48,10 +46,14 @@ export default (({navigation})=>{
         <View style={{flex:1,justifyContent:'center',alignItems:'center',paddingHorizontal:15}}>
             <Input
                 placeholder='Email'
+                inputStyle={{fontSize:15}}
                 inputContainerStyle={{borderWidth:1,borderRadius:10,paddingHorizontal:10}}
                 autoCapitalize='none'
                 errorMessage={message}
-                onChangeText={(text) => setEmail(text)}
+                onChangeText={(text) => {
+                    setMessage('')
+                    setEmail(text)
+                }}
             />
             <Button
                 title='Next'
