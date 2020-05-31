@@ -26,8 +26,11 @@ export default (({navigation})=>{
     const [register] = useMutation(REGISTER)
 
     const handleCheckUsername = () => {
-        if(!isValidUsername(username)){
-            setMessage('Username must be at least 4 characters and only contain letters, numbers, and underscore')
+        if(username.length < 4){
+            setMessage('Username must be at least 4 characters')
+        }
+        else if(!isValidUsername(username)){
+            setMessage('Username can only contain letters, numbers, and underscore')
         }
         else{
             checkUsername({
@@ -57,7 +60,6 @@ export default (({navigation})=>{
     }
 
     const isValidUsername = (username) => {
-        if (username.length < 4) return false
         let reg = /^\w+$/
         return reg.test(username)
     }

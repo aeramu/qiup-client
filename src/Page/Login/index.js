@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useLazyQuery, useMutation } from '@apollo/react-hooks';
-import { StyleSheet, View, Text, TextInput, Button, AsyncStorage } from 'react-native';
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import { View, AsyncStorage } from 'react-native';
+import {Button, Input, Text} from 'react-native-elements'
 import { gql } from 'apollo-boost';
 
 const LOGIN = gql`
@@ -34,25 +35,29 @@ export default ({navigation}) => {
   }
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={{ height: 40, borderWidth: 1, padding: 10, margin: 10 }}
+    <View style={{flex:1,justifyContent:'center',alignItems:'center',paddingHorizontal:15}}>
+      <Input
+        inputStyle={{fontSize:15}}
+        inputContainerStyle={{borderWidth:1,borderRadius:10,paddingHorizontal:10}}
         placeholder="Email or username"
         autoCapitalize="none"
         onChangeText={text => setEmail(text)}
       />
-      <TextInput
-        style={{ height: 40, borderWidth: 1, padding: 10, margin: 10 }}
+      <Input
         placeholder="Password"
+        inputStyle={{fontSize:15}}
+        inputContainerStyle={{borderWidth:1,borderRadius:10,paddingHorizontal:10}}
+        autoCapitalize='none'
         secureTextEntry={true}
-        onChangeText={text => setPassword(text)}
+        errorMessage={message}
+        onChangeText={text => {
+          setMessage('')
+          setPassword(text)
+      }}
       />
-      <Text
-        style={{marginBottom: 10, color:'red'}}
-        >{message}
-      </Text>
       <Button
         title="Login"
+        buttonStyle={{paddingHorizontal:30,borderRadius:10}}
         onPress={handleLogin}  
       />
       <View style={{margin:20, alignSelf:'center', flexDirection:'row'}}>
@@ -66,14 +71,4 @@ export default ({navigation}) => {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-  },
-});
   
