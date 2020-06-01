@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Text, View, Button, TextInput, Image, Dimensions, TouchableHighlight } from 'react-native';
-import {useMutation, useLazyQuery} from '@apollo/react-hooks'
+import {View, TextInput, Dimensions, Image, TouchableHighlight } from 'react-native';
+import {Avatar, Button} from 'react-native-elements'
+import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
 import * as ImagePicker from 'expo-image-picker'
 
@@ -115,17 +116,15 @@ export default ({navigation}) => {
           source={{uri: coverPhoto}}
         />
       </TouchableHighlight>
-      <View style={{flex:1,paddingHorizontal:15}}>
+      <View style={{flex:1,paddingHorizontal:25}}>
         <View style={{height:50,flexDirection:'row',alignItems:'flex-end'}}>
-          <TouchableHighlight
+          <Avatar
+            rounded
+            size={100}
+            containerStyle={{borderWidth:2, borderColor:'white'}}
+            source={{uri: data.me.profile.profilePhoto}}
             onPress={handleChangeProfilePhoto}
-            style={{width:100,height:100,borderRadius:100}}
-          >
-            <Image
-              style={{width:100, height:100, borderRadius:100, borderWidth:2, borderColor:'white'}}
-              source={{uri: data.me.profile.profilePhoto}}
-            />
-          </TouchableHighlight>
+          />
         </View>
         <TextInput
           style={{height:40,borderWidth:1,padding:10,margin:10}}
@@ -139,7 +138,8 @@ export default ({navigation}) => {
           onChangeText={text => setBio(text)}
         />
         <Button
-          title='save'
+          title='Save'
+          buttonStyle={{borderRadius:10}}
           onPress={handleEditProfile}
         />
       </View>

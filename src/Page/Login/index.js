@@ -35,7 +35,7 @@ export default ({navigation}) => {
   }
 
   return (
-    <View style={{flex:1,justifyContent:'center',alignItems:'center',paddingHorizontal:15}}>
+    <View style={{flex:1,justifyContent:'center',alignItems:'center',paddingHorizontal:30}}>
       <Input
         inputStyle={{fontSize:15}}
         inputContainerStyle={{borderWidth:1,borderRadius:10,paddingHorizontal:10}}
@@ -57,7 +57,8 @@ export default ({navigation}) => {
       />
       <Button
         title="Login"
-        buttonStyle={{paddingHorizontal:30,borderRadius:10}}
+        containerStyle={{alignSelf:'stretch'}}
+        buttonStyle={{borderRadius:10}}
         onPress={handleLogin}  
       />
       <View style={{margin:20, alignSelf:'center', flexDirection:'row'}}>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, ImageBackground, Dimensions} from 'react-native';
+import {View, Dimensions} from 'react-native';
+import {Button, Avatar, Image, Text} from 'react-native-elements'
 import {useQuery} from '@apollo/react-hooks'
 import { gql } from 'apollo-boost';
 
@@ -35,8 +36,10 @@ export default ({navigation}) => {
       />
       <View style={{flex:1,paddingHorizontal:15}}>
         <View style={{height:50,flexDirection:'row',alignItems:'flex-end'}}>
-          <Image
-            style={{width:100, height:100, borderRadius:100, borderWidth:2, borderColor:'white'}}
+          <Avatar
+            rounded
+            size={100}
+            containerStyle={{borderWidth:2, borderColor:'white'}}
             source={{uri: data.me.profile.profilePhoto}}
           />
           <View style={{flex:1,alignItems:'center'}}>
@@ -60,20 +63,13 @@ export default ({navigation}) => {
           <View style={{flex:2,justifyContent:'center'}}>
             <Button
               title='Edit Profile'
+              type='outline'
+              buttonStyle={{borderRadius:10}}
               onPress={() => navigation.navigate('EditProfile',{data})}
             />
           </View>
         </View>
         <Text style={{marginTop:20,marginBottom:20}}>{data.me.profile.bio}</Text>
-      </View>
-      <View style={{marginTop:15,paddingHorizontal:15}}>
-        
-      </View>
-      <View style={{marginVertical:20,paddingHorizontal:15}}>
-        
-      </View>
-      <View style={{flexDirection:'row'}}>
-        
       </View>
     </View>
   );
