@@ -15,25 +15,22 @@ const UPLOAD_IMAGE = gql`
 
 const EDIT_PROFILE = gql`
   mutation($name: String!, $bio: String!, $profilePhoto: String!, $coverPhoto: String!){
-    editProfile(name: $name, bio: $bio, profilePhoto: $profilePhoto, coverPhoto: $coverPhoto){
+    setShareProfile(name: $name, bio: $bio, profilePhoto: $profilePhoto, coverPhoto: $coverPhoto){
       id
-      username
-      profile{
-        name
-        bio
-        profilePhoto
-        coverPhoto
-      }
+      name
+      bio
+      profilePhoto
+      coverPhoto
     }
   }
 `
 
 export default ({navigation}) => {
   const {data} = navigation.state.params
-  const [name,setName] = useState(data.me.profile.name)
-  const [bio, setBio] = useState(data.me.profile.bio)
-  const [profilePhoto, setProfilePhoto] = useState(data.me.profile.profilePhoto)
-  const [coverPhoto, setCoverPhoto] = useState(data.me.profile.coverPhoto)
+  const [name,setName] = useState(data.myShareAccount.name)
+  const [bio, setBio] = useState(data.myShareAccount.bio)
+  const [profilePhoto, setProfilePhoto] = useState(data.myShareAccount.profilePhoto)
+  const [coverPhoto, setCoverPhoto] = useState(data.myShareAccount.coverPhoto)
 
   const [editProfile] = useMutation(EDIT_PROFILE)
   const [uploadImage] = useMutation(UPLOAD_IMAGE)
@@ -122,7 +119,7 @@ export default ({navigation}) => {
             rounded
             size={100}
             containerStyle={{borderWidth:2, borderColor:'white'}}
-            source={{uri: data.me.profile.profilePhoto}}
+            source={{uri: profilePhoto}}
             onPress={handleChangeProfilePhoto}
           />
         </View>

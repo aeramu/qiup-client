@@ -13,9 +13,9 @@ const UPLOAD_IMAGE = gql`
   }
 `
 
-const EDIT_PROFILE = gql`
-  mutation($username: String!,$name: String!, $bio: String!, $profilePhoto: String!, $coverPhoto: String!){
-    setProfile(username: $username, name: $name, bio: $bio, profilePhoto: $profilePhoto, coverPhoto: $coverPhoto){
+const SET_PROFILE = gql`
+  mutation($name: String!, $bio: String!, $profilePhoto: String!, $coverPhoto: String!){
+    setShareProfile(name: $name, bio: $bio, profilePhoto: $profilePhoto, coverPhoto: $coverPhoto){
       id
       username
       name
@@ -27,12 +27,10 @@ const EDIT_PROFILE = gql`
 `
 
 export default (({navigation})=>{
-    const {data} = navigation.state.params
-
     const [name,setName] = useState('')
     const [profilePhoto,setProfilePhoto] = useState('https://qiup-image.s3.amazonaws.com/profile-photo/default.jpg')
 
-    const [setProfile] = useMutation(EDIT_PROFILE)
+    const [setProfile] = useMutation(SET_PROFILE)
     const [uploadImage] = useMutation(UPLOAD_IMAGE)
 
     const handleChangeProfilePhoto = async () => {
@@ -63,14 +61,13 @@ export default (({navigation})=>{
         })
     }
       
-    const handleEditProfile = () => {
+    const handleSetProfile = () => {
         setProfile({
           variables:{
-            username: data.username,
             name,
-            bio:'',
+            bio: "",
             profilePhoto,
-            coverPhoto:'https://qiup-image.s3.amazonaws.com/cover-photo/default.jpg',
+            coverPhoto: "https://qiup-image.s3.amazonaws.com/cover-photo/default.jpg",
           }
         })
         .then(()=>{
@@ -96,7 +93,7 @@ export default (({navigation})=>{
             <Button
                 title='Next'
                 buttonStyle={{paddingHorizontal:40,borderRadius:20}}
-                onPress={handleEditProfile}
+                onPress={handleSetProfile}
             />
         </View>
     )

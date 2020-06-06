@@ -4,9 +4,9 @@ import {Input, Button} from 'react-native-elements'
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
 
-const CHECK_USERNAME = gql`
+const SET_USERNAME = gql`
     mutation($username:String!){
-        isUsernameAvailable(username:$username)
+        setShareUsername(username:$username)
     }
 `
 
@@ -14,7 +14,7 @@ export default (({navigation})=>{
     const [username,setUsername] = useState('')
     const [message,setMessage] = useState('')
 
-    const [checkUsername] = useMutation(CHECK_USERNAME)
+    const [checkUsername] = useMutation(SET_USERNAME)
 
     const handleCheckUsername = () => {
         if(username.length < 4){
@@ -30,11 +30,11 @@ export default (({navigation})=>{
                 }
             })
             .then((result) => {
-                if(result.data.isUsernameAvailable){
+                if(result.data.setShareUsername == ""){
                     navigation.navigate('RegisterProfile',{data:{username}})
                 }
                 else{
-                    setMessage('Username already taken')
+                    setMessage(result.data.setShareUsername)
                 }
             })
         }

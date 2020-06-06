@@ -4,7 +4,7 @@ import {Button} from 'react-native-elements'
 
 export default ({navigation}) => {
     const checkToken = async () => {
-        token = await AsyncStorage.getItem('token')
+        var token = await AsyncStorage.getItem('token')
         if (token){
             navigation.navigate('Home')
         }
