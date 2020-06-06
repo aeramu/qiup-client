@@ -8,7 +8,7 @@ export default ({navigation}) => {
   const handleLogout = async () => {
     await AsyncStorage.removeItem('token')
     client.resetStore()
-    navigation.navigate('Login')
+    navigation.navigate('Authentication')
   }
 
   return (

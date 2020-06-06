@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "quip-client",
-    "slug": "quip-client",
+    "name": "qiup-client",
+    "slug": "qiup-client",
     "platforms": [
       "ios",
       "android",

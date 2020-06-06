@@ -47,7 +47,7 @@ export default (({navigation})=>{
             <Input
                 placeholder='Email'
                 inputStyle={{fontSize:15}}
-                inputContainerStyle={{borderWidth:1,borderRadius:10,paddingHorizontal:10}}
+                inputContainerStyle={{borderWidth:1,borderRadius:20,paddingHorizontal:15}}
                 autoCapitalize='none'
                 errorMessage={message}
                 onChangeText={(text) => {
@@ -57,7 +57,7 @@ export default (({navigation})=>{
             />
             <Button
                 title='Next'
-                buttonStyle={{paddingHorizontal:30,borderRadius:10}}
+                buttonStyle={{paddingHorizontal:40,borderRadius:20}}
                 onPress={handleCheckEmail}
             />
         </View>

@@ -38,15 +38,15 @@ export default ({navigation}) => {
     <View style={{flex:1,justifyContent:'center',alignItems:'center',paddingHorizontal:30}}>
       <Input
         inputStyle={{fontSize:15}}
-        inputContainerStyle={{borderWidth:1,borderRadius:10,paddingHorizontal:10}}
-        placeholder="Email or username"
+        inputContainerStyle={{borderWidth:1,borderRadius:20,paddingHorizontal:15}}
+        placeholder="Email"
         autoCapitalize="none"
         onChangeText={text => setEmail(text)}
       />
       <Input
         placeholder="Password"
         inputStyle={{fontSize:15}}
-        inputContainerStyle={{borderWidth:1,borderRadius:10,paddingHorizontal:10}}
+        inputContainerStyle={{borderWidth:1,borderRadius:20,paddingHorizontal:15}}
         autoCapitalize='none'
         secureTextEntry={true}
         errorMessage={message}
@@ -57,18 +57,9 @@ export default ({navigation}) => {
       />
       <Button
         title="Login"
-        containerStyle={{alignSelf:'stretch'}}
-        buttonStyle={{borderRadius:10}}
+        buttonStyle={{paddingHorizontal:40,borderRadius:20}}
         onPress={handleLogin}  
       />
-      <View style={{margin:20, alignSelf:'center', flexDirection:'row'}}>
-        <Text>Don't have an account? </Text>
-        <Text
-          style={{color: 'blue'}}
-          onPress={()=>navigation.navigate('Register')}
-          >Register
-        </Text>
-      </View>
     </View>
   );
 }

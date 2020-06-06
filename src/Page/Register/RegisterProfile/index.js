@@ -14,25 +14,25 @@ const UPLOAD_IMAGE = gql`
 `
 
 const EDIT_PROFILE = gql`
-  mutation($name: String!, $bio: String!, $profilePhoto: String!, $coverPhoto: String!){
-    editProfile(name: $name, bio: $bio, profilePhoto: $profilePhoto, coverPhoto: $coverPhoto){
+  mutation($username: String!,$name: String!, $bio: String!, $profilePhoto: String!, $coverPhoto: String!){
+    setProfile(username: $username, name: $name, bio: $bio, profilePhoto: $profilePhoto, coverPhoto: $coverPhoto){
       id
       username
-      profile{
-        name
-        bio
-        profilePhoto
-        coverPhoto
-      }
+      name
+      bio
+      profilePhoto
+      coverPhoto
     }
   }
 `
 
 export default (({navigation})=>{
+    const {data} = navigation.state.params
+
     const [name,setName] = useState('')
     const [profilePhoto,setProfilePhoto] = useState('https://qiup-image.s3.amazonaws.com/profile-photo/default.jpg')
 
-    const [editProfile] = useMutation(EDIT_PROFILE)
+    const [setProfile] = useMutation(EDIT_PROFILE)
     const [uploadImage] = useMutation(UPLOAD_IMAGE)
 
     const handleChangeProfilePhoto = async () => {
@@ -64,8 +64,9 @@ export default (({navigation})=>{
     }
       
     const handleEditProfile = () => {
-        editProfile({
+        setProfile({
           variables:{
+            username: data.username,
             name,
             bio:'',
             profilePhoto,
@@ -87,13 +88,14 @@ export default (({navigation})=>{
             />
             <Input
                 placeholder='Name'
+                inputStyle={{fontSize:15}}
                 containerStyle={{margin:20}}
-                inputContainerStyle={{borderWidth:1,borderRadius:10,paddingHorizontal:10}}
+                inputContainerStyle={{borderWidth:1,borderRadius:20,paddingHorizontal:15}}
                 onChangeText={(text) => setName(text)}
             />
             <Button
                 title='Next'
-                buttonStyle={{paddingHorizontal:30,borderRadius:10}}
+                buttonStyle={{paddingHorizontal:40,borderRadius:20}}
                 onPress={handleEditProfile}
             />
         </View>

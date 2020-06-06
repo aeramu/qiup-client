@@ -12,7 +12,7 @@ import MyProfile from './src/Page/MyProfile'
 import EditProfile from './src/Page/EditProfile'
 import Search from './src/Page/Search'
 import Profile from './src/Page/Profile'
-import Loading from './src/Page/Loading'
+import Authentication from './src/Page/Authentication'
 
 const searchNavigator = createStackNavigator({
     'Search': Search,
@@ -53,6 +53,7 @@ const registerNavigator = createStackNavigator({
 })
 
 const authNavigator = createStackNavigator({
+    'Authentication': Authentication,
     'Login': Login,
     'Register': registerNavigator
 },
@@ -63,7 +64,6 @@ const authNavigator = createStackNavigator({
 })
 
 const rootNavigator = createSwitchNavigator({
-    'Loading': Loading,
     authNavigator,
     mainNavigator
 })

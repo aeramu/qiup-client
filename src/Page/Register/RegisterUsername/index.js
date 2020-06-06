@@ -10,20 +10,11 @@ const CHECK_USERNAME = gql`
     }
 `
 
-const REGISTER = gql`
-  mutation ($email: String!, $username: String!, $password: String!) {
-    register(email: $email, username: $username, password: $password)
-  }
-`
-
 export default (({navigation})=>{
-    const {data} = navigation.state.params
-
     const [username,setUsername] = useState('')
     const [message,setMessage] = useState('')
 
     const [checkUsername] = useMutation(CHECK_USERNAME)
-    const [register] = useMutation(REGISTER)
 
     const handleCheckUsername = () => {
         if(username.length < 4){
@@ -40,17 +31,7 @@ export default (({navigation})=>{
             })
             .then((result) => {
                 if(result.data.isUsernameAvailable){
-                    register({
-                        variables:{
-                            email: data.email,
-                            password: data.password,
-                            username: username
-                        }
-                    })
-                    .then(async (result)=>{
-                        await AsyncStorage.setItem('token', result.data.register)
-                        navigation.navigate('RegisterProfile')
-                    })
+                    navigation.navigate('RegisterProfile',{data:{username}})
                 }
                 else{
                     setMessage('Username already taken')
@@ -69,7 +50,7 @@ export default (({navigation})=>{
             <Input
                 placeholder='Username'
                 inputStyle={{fontSize:15}}
-                inputContainerStyle={{borderWidth:1,borderRadius:10,paddingHorizontal:10}}
+                inputContainerStyle={{borderWidth:1,borderRadius:20,paddingHorizontal:15}}
                 autoCapitalize='none'
                 errorMessage={message}
                 onChangeText={(text) => {
@@ -79,7 +60,7 @@ export default (({navigation})=>{
             />
             <Button
                 title='Next'
-                buttonStyle={{paddingHorizontal:30,borderRadius:10}}
+                buttonStyle={{paddingHorizontal:40,borderRadius:20}}
                 onPress={handleCheckUsername}
             />
         </View>
