@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {View, TextInput, Dimensions, Image, TouchableHighlight } from 'react-native';
-import {Avatar, Button} from 'react-native-elements'
+import {View, Dimensions, Image, TouchableHighlight } from 'react-native';
+import {Avatar, Button, Input} from 'react-native-elements'
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
 import * as ImagePicker from 'expo-image-picker'
@@ -113,7 +113,7 @@ export default ({navigation}) => {
           source={{uri: coverPhoto}}
         />
       </TouchableHighlight>
-      <View style={{flex:1,paddingHorizontal:25}}>
+      <View style={{flex:1,paddingHorizontal:15}}>
         <View style={{height:50,flexDirection:'row',alignItems:'flex-end'}}>
           <Avatar
             rounded
@@ -123,22 +123,28 @@ export default ({navigation}) => {
             onPress={handleChangeProfilePhoto}
           />
         </View>
-        <TextInput
-          style={{height:40,borderWidth:1,padding:10,margin:10}}
-          value={name}
-          onChangeText={text => setName(text)}
-        />
-        <TextInput
-          style={{height:40,borderWidth:1,padding:10,margin:10}}
-          value={bio}
-          autoCapitalize="none"
-          onChangeText={text => setBio(text)}
-        />
-        <Button
-          title='Save'
-          buttonStyle={{borderRadius:10}}
-          onPress={handleEditProfile}
-        />
+        <View style={{flex:1,alignItems:'center',marginTop:20}}>
+          <Input
+            label='Name'
+            inputStyle={{fontSize:15}}
+            inputContainerStyle={{borderWidth:1,borderRadius:10,paddingHorizontal:15}}
+            value={name}
+            onChangeText={text => setName(text)}
+          />
+          <Input
+            label='Bio'
+            inputStyle={{fontSize:15}}
+            inputContainerStyle={{borderWidth:1,borderRadius:10,paddingHorizontal:15,paddingVertical:5}}
+            value={bio}
+            multiline={true}
+            onChangeText={text => setBio(text)}
+          />
+          <Button
+            title='Save'
+            buttonStyle={{paddingHorizontal:40,borderRadius:20}}
+            onPress={handleEditProfile}
+          />
+        </View>
       </View>
     </View>
   );
