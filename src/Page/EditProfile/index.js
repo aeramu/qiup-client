@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Dimensions, Image, TouchableHighlight } from 'react-native';
+import {View, Dimensions, Image, TouchableHighlight} from 'react-native';
 import {Avatar, Button, Input} from 'react-native-elements'
 import {useMutation} from '@apollo/react-hooks'
 import {gql} from 'apollo-boost'
@@ -106,14 +106,14 @@ export default ({navigation}) => {
   }
 
   return (
-    <View style={{flex:1}}>
+    <View style={{flex:1,marginBottom:20,justifyContent:'flex-end'}}>
       <TouchableHighlight onPress={handleChangeCoverPhoto}>
         <Image
           style={{alignSelf:'stretch', height:Math.round(Dimensions.get('window').width*2/3)}}
           source={{uri: coverPhoto}}
         />
       </TouchableHighlight>
-      <View style={{flex:1,paddingHorizontal:15}}>
+      <View style={{paddingHorizontal:15}}>
         <View style={{height:50,flexDirection:'row',alignItems:'flex-end'}}>
           <Avatar
             rounded
@@ -123,7 +123,7 @@ export default ({navigation}) => {
             onPress={handleChangeProfilePhoto}
           />
         </View>
-        <View style={{flex:1,alignItems:'center',marginTop:20}}>
+        <View style={{alignItems:'center',marginVertical:20}}>
           <Input
             label='Name'
             inputStyle={{fontSize:15}}
